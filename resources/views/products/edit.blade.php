@@ -7,7 +7,7 @@
         @csrf
         @method('patch')
         <div class="area-msg">
-            "金額は入力必須です"
+            @include('commons.errors')
         </div>
         <table>
             <tr>

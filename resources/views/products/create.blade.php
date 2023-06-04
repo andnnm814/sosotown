@@ -6,7 +6,7 @@
     <form action="{{ route('products.store') }}" method="post" class="form" enctype="multipart/form-data">
         @csrf
         <div class="area-msg">
-            "金額は入力必須です"
+            @include('commons.errors')
         </div>
         <table>
             <tr>

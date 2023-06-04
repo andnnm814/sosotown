@@ -22,8 +22,16 @@ a, a:active, a:focus {
     text-align: center;
 }
 .input-box {
+    display: block;
     margin: 0 auto;
     width: 90%;
+}
+.input-box2 {
+    display: flex;
+    width: 40%;
+}
+main {
+    min-height: 600px;
 }
 /* ------------ ヘッダー ------------ */
 header {
@@ -41,9 +49,32 @@ header h1 {
     font-family: 'Montserrat', sans-serif;
     line-height: 80px;
 }
+.header-line {
+    display: flex;
+    justify-content: space-between;
+}
 header h1 a {
     color: #b6a489;
     text-decoration: none;
+    width: 20%;
+}
+.swich-auth {
+    color: white;
+    text-align: none;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    width: 10%;
+}
+.swich-auth a {
+    text-decoration: none;
+    color: white;
+    padding-left: 5px;
+}
+.auth-btn {
+    background-color: #333;
+    width: fit-content;
+    color: white;
 }
 /* ------------ フッター ------------ */
 footer {
@@ -240,6 +271,12 @@ a.panel:hover {
     color: white;
     font-weight: bold;
 }
+.likes {
+    color: #333;
+}
+.liked {
+    color: red;
+}
 /* ------------ カート ------------ */
 .form-cart {
     margin: 0 auto;
@@ -250,21 +287,21 @@ a.panel:hover {
 }
 .cart-item {
     margin: 30px auto 50px;
+    padding-bottom: 15px;
     border: #bbbaba;
     border-bottom: 1px solid #bbbaba;
     min-height: 200px;
     display: flex;
     align-items: center;
 }
-.cart-item-left {
-    width: 35%;
+.cart-img {
+    object-fit: cover;
+    height: 180px;
 }
-.cart-item-center {
-    width: 35%;
-}
-.cart-item-right {
-    width: 10%;
+.cart-row {
+    width: 20%  ;
 }
 .form-cart button {
     width: 100%;
 }
+

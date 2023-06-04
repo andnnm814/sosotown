@@ -20,6 +20,14 @@
         <div class="product-detail">
             <p>{{ $product->comment }}</p>
         </div>
+        <!-- お気に入り -->
+        @if(!$product->isLikedBy(Auth::user()))
+            <div class="likes-mark">
+                <span class="likes">
+                    <i class="fa-regular fa-heart" date-product-id="{{ $product->id }}">お気に入り登録</i>
+                </span>
+            </div>
+        @endif
         <!-- 戻る＆購入ボタン -->
         <div class="product-buy">
             <div class="item-left">
@@ -27,7 +35,8 @@
             </div>
             <form action="{{ route('products.addCart', $product) }}" method="post" class="item-right">
             @csrf
-                <input type="hidden" name="cart_item" value="{{ $product->id }}">
+                <input type="hidden" name="product_id" value="{{ $product->id }}">
+                <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
                 <input type="number" name="product_quantity" pattern="[1-9][0-9]*" min="1" class="product_quantity" id="product_quantity" placeholder="1" required autofocus>
                 <input type="submit" class="buy-btn button" value="カートに入れる">
             </form>

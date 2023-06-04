@@ -47,7 +47,7 @@
                 <a href="{{ route('products.create') }}" class="transition-btn button">商品登録</a>
             </div>
             <div>
-                <a href="{{ route('users.show') }}" class="transition-btn button">マイページ</a>
+                <a href="/" class="transition-btn button">マイページ</a>
             </div>
         </div>
         
@@ -67,8 +67,6 @@
                 </a>
                 @endforeach
             </div>
-            {{ $products->appends(Request::all())->links() }}
-            <!-- {{ $products->links() }} -->
         </div>
 
     </div>

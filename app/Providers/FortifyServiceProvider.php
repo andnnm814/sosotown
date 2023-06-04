@@ -42,11 +42,13 @@ class FortifyServiceProvider extends ServiceProvider
         //     return Limit::perMinute(5)->by($request->session()->get('login.id'));
         // });
 
-        // Fortify::registerView(function() {
-        //     return view('auth.register');
-        // });
-        // Fortify::loginView(function() {
-        //     return view('auth.login');
-        // });
+        // ログインと会員登録のビューの場所を指定
+        Fortify::registerView(function() {
+            return view('auth.register');
+        });
+        Fortify::loginView(function() {
+            return view('auth.login');
+        });
+
     }
 }

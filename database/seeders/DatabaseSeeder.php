@@ -3,6 +3,8 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+
+use App\Models\Product;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -23,7 +25,11 @@ class DatabaseSeeder extends Seeder
         //     'email' => 'test@example.com',
         // ]);
         foreach(self::SEEDERS as $seeder) {
-            $this->call($seeder);
+            // $this->call($seeder);
+            $this->call([
+                CategorySeeder::class,
+                ProductSeeder::class,
+            ]);
         }
     }
 }

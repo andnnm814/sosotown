@@ -83,7 +83,7 @@ return [
     |
     */
 
-    'locale' => 'en',
+    'locale' => 'ja',
 
     /*
     |--------------------------------------------------------------------------
@@ -170,6 +170,8 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         // APP\Providers\FortifyServiceProvider::class,
+
+        App\Providers\FortifyServiceProvider::class,
     ])->toArray(),
 
     /*
