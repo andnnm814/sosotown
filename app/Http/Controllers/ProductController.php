@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Auth;
 use App\Models\Product;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -80,7 +81,11 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
-        $data = ['product' => $product];
+        $likeProducts = Auth::user()->likes()->pluck('product_id');
+        $data = [
+            'product' => $product,
+            'likeProducts' => $likeProducts,
+        ];
         return view('products.show', $data);
     }
 
@@ -156,12 +161,12 @@ class ProductController extends Controller
             'session_quantity' => $request->product_quantity,
         ];
 
-        // 1) カート内に商品が入っていない場合(＝sessionに”cartData”という名前のデータが「無い」)
+        // 1 カート内に商品が入っていない場合(＝sessionに”cartData”という名前のデータが「無い」)
         if(!$request->session()->has('cartData')) {
             // セッションに商品を追加する
             $request->session()->push('cartData', $cartData);
         }
-        else // 2) カート内に商品が入っている場合（＝sessionに”cartData”という名前のデータが「有る」）
+        else // 2 カート内に商品が入っている場合（＝sessionに”cartData”という名前のデータが「有る」）
         {
             // ”cartData”の情報を取得
             $sessionCartData = $request->session()->get('cartData');
@@ -181,7 +186,7 @@ class ProductController extends Controller
                     break; //④
                 }   
             }
-            // 3) カート内に商品があり、かつ追加する商品がカート内の商品が異なる場合
+            // 3 カート内に商品があり、かつ追加する商品がカート内の商品が異なる場合
             if($sameProductId === false){
                 $request->session()->push('cartData', $cartData);
             }
@@ -304,24 +309,33 @@ class ProductController extends Controller
         return view('products.index', $data);
     }
 
-    public function like(Request $request)
-    {
-        $user_id = Auth::user()->id;
-        $product_id = $request->product_id; // 商品idが、Viewのdata属性→jQuery Ajax経由で$requestに渡ってきているので、それをキャッチ
-        $like = new Like;
-        $product = Product::findOrFail($product_id);
+    // public function like(Request $request)
+    // {
+    //     $user_id = Auth::user()->id;
+    //     $product_id = $request->product_id; // 商品idが、Viewのdata属性→jQuery Ajax経由で$requestに渡ってきているので、それをキャッチ
+    //     $like = new Like;
+    //     $product = Product::findOrFail($product_id);
 
-        // 既にお気に入り登録済
-        if($product->isLikedBy($user_id)) {
-            Like::where('product_id', $product_id)->where('user_id', $user_id)->delete();
-        }else {
-            // お気に入り登録(likesテーブルに新しいレコード追加)
-            $like->product_id = $request->product_id;
-            $like->user_id = $user_id;
-            $like->save();
-        }
-        return redirect(route('products.show'));
+    //     // 既にお気に入り登録済
+    //     if($product->isLikedBy($user_id)) {
+    //         Like::where('product_id', $product_id)->where('user_id', $user_id)->delete();
+    //     }else {
+    //         // お気に入り登録(likesテーブルに新しいレコード追加)
+    //         $like->product_id = $request->product_id;
+    //         $like->user_id = $user_id;
+    //         $like->save();
+    //     }
+    //     return redirect(route('products.show'));
+    // }
+
+    // 商品お気に入り機能
+    public function storeLike(Product $product) {
+        Auth::user()->likes()->attach($product);
     }
+    public function deleteLike(Product $product) {
+        Auth::user()->likes()->detach($product);
+    }
+    
 
 
 

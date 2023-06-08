@@ -20,14 +20,11 @@
         <div class="product-detail">
             <p>{{ $product->comment }}</p>
         </div>
-        <!-- お気に入り -->
-        @if(!$product->isLikedBy(Auth::user()))
-            <div class="likes-mark">
-                <span class="likes">
-                    <i class="fa-regular fa-heart" date-product-id="{{ $product->id }}">お気に入り登録</i>
-                </span>
+        <!-- お気に入りボタン -->
+            <div id="app">
+                <!-- 「like.vue」にproduct-id＆likeProductsのデータをv-bindを展開して渡す -->
+                <like v-bind:product-id="{{ $product->id }}" v-bind:liked-data="{{ $likeProducts }}"></like>
             </div>
-        @endif
         <!-- 戻る＆購入ボタン -->
         <div class="product-buy">
             <div class="item-left">

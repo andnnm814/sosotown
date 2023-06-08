@@ -59,7 +59,7 @@ class ProductSeeder extends Seeder
             Product::create([
                 "category_id" => rand(1,3),
                 "name" => "サンプル".$i,
-                "price" => rand(100, 100) * 100,
+                "price" => rand(10, 100) * 100,
                 "comment" => "サンプルサンプルサンプルサンプル",
                 "img1_path" => "G800dZ7eGzN4E4t0aefOpllSfc2vFS6AvYXmHB2E.jpg",
                 "img2_path" => "G800dZ7eGzN4E4t0aefOpllSfc2vFS6AvYXmHB2E.jpg",

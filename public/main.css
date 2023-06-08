@@ -271,12 +271,12 @@ a.panel:hover {
     color: white;
     font-weight: bold;
 }
-.likes {
+/* .likes {
     color: #333;
 }
 .liked {
     color: red;
-}
+} */
 /* ------------ カート ------------ */
 .form-cart {
     margin: 0 auto;
