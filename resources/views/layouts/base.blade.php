@@ -9,9 +9,10 @@
     <link rel="stylesheet" href="/main.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
     <link href="https://use.fontawesome.com/releases/v6.4.0/css/all.css" rel="stylesheet">
-
+    <script src="{{ asset('js/app.js') }}"></script>
 </head>
 <body>
+    <div id="app">
     <header>
         <div class="header-line">
         <h1><a href="/">SOSOTOWN</a></h1>
@@ -36,6 +37,6 @@
     <footer>
         Copyright <a href="/">SOSOTOWN</a>. All Rights Reserved.
     </footer>
-    <!-- <script src="/like.js"></script> -->
+    </div>
 </body>
 </html>

@@ -29,7 +29,7 @@
             },
             storeProductId() {
                 axios
-                .post("storeLike/" + this.productId, {
+                .post("/api/storeLike/", {
                     productId: this.productId
                 })
                 .then(function () {
@@ -41,10 +41,8 @@
             },
             deleteProductId() {
                 axios
-                .delete("deleteLike/" + this.productId, {
-                    data: {
-                        productId: this.productId
-                    }
+                .delete("/api/deleteLike/", {
+                    productId: this.productId
                 })
                 .then(function () {
                     console.log("success");

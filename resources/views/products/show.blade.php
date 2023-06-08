@@ -21,9 +21,9 @@
             <p>{{ $product->comment }}</p>
         </div>
         <!-- お気に入りボタン -->
-            <div id="app">
+            <div>
                 <!-- 「like.vue」にproduct-id＆likeProductsのデータをv-bindを展開して渡す -->
-                <like v-bind:product-id="{{ $product->id }}" v-bind:liked-data="{{ $likeProducts }}"></like>
+                <like-component v-bind:productId="{{ $product->id }}" v-bind:likedData="{{ $likeProducts }}"></like-component>
             </div>
         <!-- 戻る＆購入ボタン -->
         <div class="product-buy">
