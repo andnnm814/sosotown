@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Product;
 use App\Models\User;
+use App\Models\Like;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -82,9 +83,11 @@ class ProductController extends Controller
     public function show(Product $product)
     {
         $likeProducts = Auth::user()->likes()->pluck('product_id');
+        $user_id = Auth::id();
         $data = [
             'product' => $product,
             'likeProducts' => $likeProducts,
+            'user_id' => $user_id
         ];
         return view('products.show', $data);
     }
@@ -258,6 +261,18 @@ class ProductController extends Controller
         return view('products.emptyCart');
     }
 
+    public function showLiked()
+    {
+        $likeProductId = Auth::user()->likes()->get('product_id');
+        $likeProducts = Product::find($likeProductId);
+        
+        // dd($likeProduct);
+        $data = [
+            "likeProducts" => $likeProducts
+        ];
+        return view('products.showLiked', $data);
+    }
+
     public function search(Request $request)
     {
         $category_id = $request->category_id;
@@ -309,32 +324,38 @@ class ProductController extends Controller
         return view('products.index', $data);
     }
 
-    // public function like(Request $request)
-    // {
-    //     $user_id = Auth::user()->id;
-    //     $product_id = $request->product_id; // 商品idが、Viewのdata属性→jQuery Ajax経由で$requestに渡ってきているので、それをキャッチ
-    //     $like = new Like;
-    //     $product = Product::findOrFail($product_id);
-
-    //     // 既にお気に入り登録済
-    //     if($product->isLikedBy($user_id)) {
-    //         Like::where('product_id', $product_id)->where('user_id', $user_id)->delete();
-    //     }else {
-    //         // お気に入り登録(likesテーブルに新しいレコード追加)
-    //         $like->product_id = $request->product_id;
-    //         $like->user_id = $user_id;
-    //         $like->save();
-    //     }
-    //     return redirect(route('products.show'));
-    // }
-
     // 商品お気に入り機能
-    public function storeLike(Product $product) {
-        Auth::user()->likes()->attach($product);
+    public function storeLike(Request $request) {
+        $like = Like::where('product_id', $request->productId)
+        ->where('user_id', $request->userId)
+        ->first();
+
+        if($like) {
+            $like->delete();
+            return response()->json(['message' => 'Like deleted successfully'], 200);
+        }
+
+        $like = new Like();
+        $like->user_id = $request->userId;
+        $like->product_id = $request->productId;
+        $like->save();
+        return response()->json(['message' => 'Like deleted successfully'], 200);
     }
-    public function deleteLike(Product $product) {
-        Auth::user()->likes()->detach($product);
-    }
+
+    // public function deleteLike(Request $request) {
+    //     // Likeを検索する
+    //     $like = Like::where('product_id', $request->productId)
+    //     ->where('user_id', $request->userId)
+    //     ->first();
+
+    //     // Likeが存在する場合は削除する
+    //     if ($like) {
+    //     $like->delete();
+
+    //     // 必要な処理を追加する...
+    //     return response()->json(['message' => 'Like deleted successfully'], 200);
+    //     }
+    // }
     
 
 

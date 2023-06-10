@@ -23,6 +23,7 @@ Route::get('/', function () {
 
 Route::group(['middleware' => ['auth']], function(){
     Route::get('/home', [ProductController::class, "index"])->name('products.index');
+    Route::get('/products/showLiked', [ProductController::class, "showLiked"])->name('products.showLiked');
     Route::get('/products/index', [ProductController::class, "index"])->name('products.index');
     Route::get('/products/search', [ProductController::class, "search"])->name('products.search');
     Route::get('/products/create', [ProductController::class, "create"])->name('products.create');

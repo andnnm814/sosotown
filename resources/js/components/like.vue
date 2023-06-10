@@ -1,9 +1,9 @@
 <template>
-    <div class="">
+    <div class="heart">
         <!-- isActiveTrueがtrueかfalseでスタイルの切り替えをおこなっている -->
         <i
-            v-on:click="storeOrDelete"
-            class="[isActiveTrue === true ? 'fa-solid fa-heart' : 'fa-regular fa-heart']"
+            v-on:click="storeProductId()"
+            :class="[isActiveTrue === true ? 'fa-solid fa-heart fa-2x' : 'fa-regular fa-heart fa-2x']"
         ></i>
     </div>
 </template>
@@ -16,10 +16,10 @@
 <script>
     export default {
         // bladeから渡されたデータを受けとる
-        props: ["productId", "likedData"],
+        props: ["productId", "likedData", "userId"],
         data() {
             return {
-                isActiveTrue: this.likedData.includes(this.productId) ? false : true
+                isActiveTrue: this.likedData.includes(this.productId) ? true : false
             };
         }
         ,methods: {
@@ -30,37 +30,39 @@
             storeProductId() {
                 axios
                 .post("/api/storeLike/", {
-                    productId: this.productId
+                    productId: this.productId,
+                    userId: this.userId
                 })
-                .then(function () {
+                .then(() => {
                     console.log("success");
+                    this.change();
                 })
-                .catch(function () {
+                .catch(() => {
                     console.log("error");
                 });
-            },
-            deleteProductId() {
-                axios
-                .delete("/api/deleteLike/", {
-                    productId: this.productId
-                })
-                .then(function () {
-                    console.log("success");
-                })
-                .catch(function () {
-                    console.log("error");
-                })
-            },
-            storeOrDelete() {
-                const isTrue = this.likedData.includes(this.productId);
-                if(isTrue === true) {
-                    this.deleteProductId();
-                    this.change();
-                }else{
-                    this.storeProductId();
-                    this.change();
-                }
             }
+            // deleteProductId() {
+            //     axios
+            //     .delete("/api/deleteLike/", {
+            //         productId: this.productId
+            //     })
+            //     .then(function () {
+            //         console.log("success");
+            //     })
+            //     .catch(function () {
+            //         console.log("error");
+            //     })
+            // },
+            // storeOrDelete() {
+            //     const isTrue = this.likedData.includes(this.productId);
+            //     if(isTrue === true) {
+            //         this.deleteProductId();
+            //         this.change();
+            //     }else{
+            //         this.storeProductId();
+            //         this.change();
+            //     }
+            // }
         }
     }
 </script>

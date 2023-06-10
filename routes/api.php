@@ -20,5 +20,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 // Route::post('twitter/account/delete', 'UserTwitterAccountController@delete')->name('twitter.deleteAccount');
-Route::post('storeLike', 'ProductController@storeLike')->name('products.storeLike'); 
-Route::post('deleteLike', 'ProductController@deleteLike')->name('products.deleteLike');
+// Route::post('storeLike', 'ProductController@storeLike')->name('products.storeLike'); 
+// Route::post('deleteLike', 'ProductController@deleteLike')->name('products.deleteLike');
+Route::post('storeLike', [ProductController::class, "storeLike"])->name('products.storeLike');
+// Route::post('deleteLike', [ProductController::class, "deleteLike"])->name('products.deleteLike');

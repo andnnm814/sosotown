@@ -7,7 +7,7 @@
 // import './bootstrap';
 // import Vue from 'vue';
 require('./bootstrap');
-import { createApp } from 'vue';
+import { createApp } from 'vue/dist/vue.esm-bundler.js';
 
 /**
  * Next, we will create a fresh Vue application instance. You may then begin
@@ -22,6 +22,12 @@ import LikeComponent from './components/like.vue';
 const app = createApp({});
 app.component('like-component', LikeComponent);
 app.mount('#app');
+
+// createApp({
+//     components: {
+//         LikeComponent
+//     }
+// }).mount('#app');
 
 // import ExampleComponent from './components/ExampleComponent.vue';
 // app.component('example-component', ExampleComponent);

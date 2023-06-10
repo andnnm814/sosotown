@@ -19819,10 +19819,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   // bladeから渡されたデータを受けとる
-  props: ["productId", "likedData"],
+  props: ["productId", "likedData", "userId"],
   data: function data() {
     return {
-      isActiveTrue: this.likedData.includes(this.productId) ? false : true
+      isActiveTrue: this.likedData.includes(this.productId) ? true : false
     };
   },
   methods: {
@@ -19831,33 +19831,38 @@ __webpack_require__.r(__webpack_exports__);
       this.isActiveTrue = !this.isActiveTrue;
     },
     storeProductId: function storeProductId() {
+      var _this = this;
       axios.post("/api/storeLike/", {
-        productId: this.productId
+        productId: this.productId,
+        userId: this.userId
       }).then(function () {
         console.log("success");
+        _this.change();
       })["catch"](function () {
         console.log("error");
       });
-    },
-    deleteProductId: function deleteProductId() {
-      axios["delete"]("/api/deleteLike/", {
-        productId: this.productId
-      }).then(function () {
-        console.log("success");
-      })["catch"](function () {
-        console.log("error");
-      });
-    },
-    storeOrDelete: function storeOrDelete() {
-      var isTrue = this.likedData.includes(this.productId);
-      if (isTrue === true) {
-        this.deleteProductId();
-        this.change();
-      } else {
-        this.storeProductId();
-        this.change();
-      }
-    }
+    } // deleteProductId() {
+    //     axios
+    //     .delete("/api/deleteLike/", {
+    //         productId: this.productId
+    //     })
+    //     .then(function () {
+    //         console.log("success");
+    //     })
+    //     .catch(function () {
+    //         console.log("error");
+    //     })
+    // },
+    // storeOrDelete() {
+    //     const isTrue = this.likedData.includes(this.productId);
+    //     if(isTrue === true) {
+    //         this.deleteProductId();
+    //         this.change();
+    //     }else{
+    //         this.storeProductId();
+    //         this.change();
+    //     }
+    // }
   }
 });
 
@@ -19877,15 +19882,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
 var _hoisted_1 = {
-  "class": ""
+  "class": "heart"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" isActiveTrueがtrueかfalseでスタイルの切り替えをおこなっている "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
-    onClick: _cache[0] || (_cache[0] = function () {
-      return $options.storeOrDelete && $options.storeOrDelete.apply($options, arguments);
+    onClick: _cache[0] || (_cache[0] = function ($event) {
+      return $options.storeProductId();
     }),
-    "class": "[isActiveTrue === true ? 'fa-solid fa-heart' : 'fa-regular fa-heart']"
-  })]);
+    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)([$data.isActiveTrue === true ? 'fa-solid fa-heart fa-2x' : 'fa-regular fa-heart fa-2x'])
+  }, null, 2 /* CLASS */)]);
 }
 
 /***/ }),
@@ -30947,7 +30952,7 @@ var __webpack_exports__ = {};
   !*** ./resources/js/app.js ***!
   \*****************************/
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
+/* harmony import */ var vue_dist_vue_esm_bundler_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue/dist/vue.esm-bundler.js */ "./node_modules/vue/dist/vue.esm-bundler.js");
 /* harmony import */ var _components_like_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./components/like.vue */ "./resources/js/components/like.vue");
 /**
  * First we will load all of this project's JavaScript dependencies which
@@ -30969,9 +30974,15 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 // const Vue = createApp({});
 // Vueコンポーネントのインポート例
 
-var app = (0,vue__WEBPACK_IMPORTED_MODULE_0__.createApp)({});
+var app = (0,vue_dist_vue_esm_bundler_js__WEBPACK_IMPORTED_MODULE_0__.createApp)({});
 app.component('like-component', _components_like_vue__WEBPACK_IMPORTED_MODULE_1__["default"]);
 app.mount('#app');
+
+// createApp({
+//     components: {
+//         LikeComponent
+//     }
+// }).mount('#app');
 
 // import ExampleComponent from './components/ExampleComponent.vue';
 // app.component('example-component', ExampleComponent);
