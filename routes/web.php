@@ -17,11 +17,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('/home');
+// });
 
 Route::group(['middleware' => ['auth']], function(){
+    Route::get('/', [ProductController::class, "index"])->name('products.index');
     Route::get('/home', [ProductController::class, "index"])->name('products.index');
     Route::get('/products/showLiked', [ProductController::class, "showLiked"])->name('products.showLiked');
     Route::get('/products/index', [ProductController::class, "index"])->name('products.index');

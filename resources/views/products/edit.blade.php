@@ -14,9 +14,9 @@
                 <td>カテゴリ</td>
                 <td>
                     <select name="category_id" class="form-select">
-                        <option value="{{ $product->category->id }}" hidden>{{ $product->category->name }}</option>
+                        <!-- <option value="{{ old('category_id'), $product->category->id }}" hidden>{{ $product->category->name }}</option> -->
                         @foreach (\App\Models\Category::all() as $category)
-                        <option value="{{ $category->id }}">{{ $category->name }}</option>
+                        <option value="{{ $category->id }}" @if(old('category_id') == $category->id) selected @endif>{{ $category->name }}</option>
                         @endforeach
                     </select>
                 </td>
