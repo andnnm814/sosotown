@@ -21,15 +21,29 @@
             <p>{{ $product->comment }}</p>
         </div>
         <!-- お気に入りボタン -->
+        @guest
+        <div class="heart">
+            <a href="/login"><i class="fa-regular fa-heart fa-2x"></i></a>
+        </div>
+        @endguest
+        @auth
             <div>
                 <!-- 「like.vue」にproduct-id＆likeProductsのデータをv-bindを展開して渡す -->
                 <like-component :product-id="{{ $product->id }}" :liked-data="{{ $likeProducts }}" :user-id="{{ $user_id }}"></like-component>
             </div>
+        @endauth
         <!-- 戻る＆購入ボタン -->
         <div class="product-buy">
             <div class="item-left">
                 <a href="{{ route('products.index') }}">＜ TOPへ戻る</a>
             </div>
+            @guest
+            <form action="" method="" class="item-right">
+                <input type="number" name="product_quantity" pattern="[1-9][0-9]*" min="1" class="product_quantity" id="product_quantity" placeholder="1" required autofocus>
+                <a href="/login" class="buy-btn button">カートに入れる</a>
+            </form>
+            @endguest
+            @auth
             <form action="{{ route('products.addCart', $product) }}" method="post" class="item-right">
             @csrf
                 <input type="hidden" name="product_id" value="{{ $product->id }}">
@@ -37,6 +51,7 @@
                 <input type="number" name="product_quantity" pattern="[1-9][0-9]*" min="1" class="product_quantity" id="product_quantity" placeholder="1" required autofocus>
                 <input type="submit" class="buy-btn button" value="カートに入れる">
             </form>
+            @endauth
             <div class="item-right">
                 <p class="price">¥{{ $product->price }}-</p>
             </div>

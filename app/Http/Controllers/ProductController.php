@@ -82,13 +82,29 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
-        $likeProducts = Auth::user()->likes()->pluck('product_id');
-        $user_id = Auth::id();
-        $data = [
-            'product' => $product,
-            'likeProducts' => $likeProducts,
-            'user_id' => $user_id
-        ];
+        // $likeProducts = Auth::user()->likes()->pluck('product_id');
+        // $user_id = Auth::id();  
+                
+        // $data = [
+        //     'product' => $product,
+        //     'likeProducts' => $likeProducts,
+        //     'user_id' => $user_id
+        // ];
+
+        if(Auth::check()){
+            $likeProducts = Auth::user()->likes()->pluck('product_id');
+            $user_id = Auth::id(); 
+            $data = [
+                'product' => $product,
+                'likeProducts' => $likeProducts,
+                'user_id' => $user_id
+            ];
+        }elseif(!Auth::check()){
+            $data = [
+                'product' => $product
+            ];
+        }
+        
         return view('products.show', $data);
     }
 

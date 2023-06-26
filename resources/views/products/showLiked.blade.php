@@ -18,7 +18,6 @@
                 </a>
             </div>
         @endforeach
-        <button type="submit" class="submit-btn button">レジへ進む</button>
         <a href="{{ route('products.index') }}" class="transition-btn button"> 買い物を続ける</a>
     </div>
 @endsection()
