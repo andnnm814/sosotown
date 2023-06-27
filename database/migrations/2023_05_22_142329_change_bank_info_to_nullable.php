@@ -12,11 +12,11 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->string('bankInfo1')->nullable(true)->change();
-            $table->string('bankInfo2')->nullable(true)->change();
-            $table->string('bankInfo3')->nullable(true)->change();
-            $table->string('bankInfo4')->nullable(true)->change();
-            $table->string('bankInfo5')->nullable(true)->change();
+            $table->string('financial_institution')->nullable(true)->change();
+            $table->string('branch_name')->nullable(true)->change();
+            $table->string('account_type')->nullable(true)->change();
+            $table->string('account_number')->nullable(true)->change();
+            $table->string('nominee')->nullable(true)->change();
         });
     }
 
@@ -26,11 +26,11 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->string('bankInfo1')->nullable(false)->change();
-            $table->string('bankInfo2')->nullable(false)->change();
-            $table->string('bankInfo3')->nullable(false)->change();
-            $table->string('bankInfo4')->nullable(false)->change();
-            $table->string('bankInfo5')->nullable(false)->change();
+            $table->string('financial_institution')->nullable(false)->change();
+            $table->string('branch_name')->nullable(false)->change();
+            $table->string('account_type')->nullable(false)->change();
+            $table->string('account_number')->nullable(false)->change();
+            $table->string('nominee')->nullable(false)->change();
         });
     }
 };

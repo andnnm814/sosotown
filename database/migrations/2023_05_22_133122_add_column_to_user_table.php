@@ -12,13 +12,13 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->string('postcode');
+            $table->string('post_code');
             $table->string('adress');
-            $table->string('bankInfo1');
-            $table->string('bankInfo2');
-            $table->string('bankInfo3');
-            $table->string('bankInfo4');
-            $table->string('bankInfo5');
+            $table->string('financial_institution');
+            $table->string('branch_name');
+            $table->string('account_type');
+            $table->string('account_number');
+            $table->string('nominee');
         });
     }
 
@@ -28,13 +28,13 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->dropColumn('postcode');
+            $table->dropColumn('post_code');
             $table->dropColumn('adress');
-            $table->dropColumn('bankInfo1');
-            $table->dropColumn('bankInfo2');
-            $table->dropColumn('bankInfo3');
-            $table->dropColumn('bankInfo4');
-            $table->dropColumn('bankInfo5');
+            $table->dropColumn('financial_institution');
+            $table->dropColumn('branch_name');
+            $table->dropColumn('account_type');
+            $table->dropColumn('account_number');
+            $table->dropColumn('nominee');
         });
     }
 };
