@@ -20,7 +20,7 @@
             </tr>
             <tr>
                 <td>郵便番号</td>
-                <td><input type="text" name="postcode" value="{{ old('postcode', $user->postcode) }}" class="create-form" maxlength="7"></td>
+                <td><input type="text" name="post_code" value="{{ old('post_code', $user->post_code) }}" class="create-form" maxlength="7"></td>
             </tr>
             <tr>
                 <td>住所</td>
@@ -28,24 +28,24 @@
             </tr>
             <tr>
                 <td>金融機関名（全角）</td>
-                <td><input type="text" name="bankInfo1" class="create-form" maxlength="50" value="{{ old('bankInfo1', $user->bankInfo1) }}"></td>
+                <td><input type="text" name="financial_institution" class="create-form" maxlength="50" value="{{ old('financial_institution', $user->financial_institution) }}"></td>
             </tr>
             <tr>
                 <td>支店名（全角）</td>
-                <td><input type="text" name="bankInfo2" class="create-form" maxlength="50" value="{{ old('bankInfo2', $user->bankInfo2) }}"></td>
+                <td><input type="text" name="branch_name" class="create-form" maxlength="50" value="{{ old('branch_name', $user->branch_name) }}"></td>
             </tr>
             <tr>
                 <td>口座種別</td>
-                <td><input type="radio" name="bankInfo3" class="" value="普通">普通</td>
-                <td><input type="radio" name="bankInfo3" class="" value="当座">当座</td>
+                <td><input type="radio" name="account_type" class="" value="普通">普通</td>
+                <td><input type="radio" name="account_type" class="" value="当座">当座</td>
             </tr>
             <tr>
                 <td>口座番号（半角数字）</td>
-                <td><input type="text" name="bankInfo4" class="create-form" maxlength="10" value="{{ old('bankInfo4', $user->bankInfo4) }}"></td>
+                <td><input type="text" name="account_number" class="create-form" maxlength="10" value="{{ old('account_number', $user->account_number) }}"></td>
             </tr>
             <tr>
                 <td>口座名義人名（カナ）</td>
-                <td><input type="text" name="bankInfo5" class="create-form" value="{{ old('bankInfo5', $user->bankInfo5) }}"></td>
+                <td><input type="text" name="nominee" class="create-form" value="{{ old('nominee', $user->nominee) }}"></td>
             </tr>
         </table>
 

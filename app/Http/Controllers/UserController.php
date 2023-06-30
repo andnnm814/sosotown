@@ -21,13 +21,13 @@ class UserController extends Controller
         $request->validate([
             'name' => 'required',
             'email' => 'required',
-            'postcode' => 'nullable|numeric',
+            'post_code' => 'nullable|numeric',
             'adress' => 'nullable',
-            'bankInfo1' => 'nullable',
-            'bankInfo2' => 'nullable',
-            'bankInfo3' => 'nullable',
-            'bankInfo4' => 'nullable',
-            'bankInfo5' => 'nullable',
+            'financial_institution' => 'nullable',
+            'branch_name' => 'nullable',
+            'account_type' => 'nullable',
+            'account_number' => 'nullable',
+            'nominee' => 'nullable',
         ]);
 
         $pass = Auth::user()->password;
@@ -37,13 +37,13 @@ class UserController extends Controller
                 'name' => $request->name,
                 'email' => $request->email,
                 'password' => $pass,
-                'postcode' => $request->postcode,
+                'post_code' => $request->post_code,
                 'adress' => $request->adress,
-                'bankInfo1' => $request->bankInfo1,
-                'bankInfo2' => $request->bankInfo2,
-                'bankInfo3' => $request->bankInfo3,
-                'bankInfo4' => $request->bankInfo4,
-                'bankInfo5' => $request->bankInfo5,
+                'financial_institution' => $request->financial_institution,
+                'branch_name' => $request->branch_name,
+                'account_type' => $request->account_type,
+                'account_number' => $request->account_number,
+                'nominee' => $request->nominee,
             ]);
         
         return redirect(route('users.show'));
