@@ -8,12 +8,12 @@
         <!-- 商品画像 -->
         <div class="product-img-container">
             <div class="img-main">
-                <img src="{{asset('storage/'.$product->img1_path)}}" alt="">
+                <img src="{{asset('storage/'.$product->img1_path)}}" alt="" id="js-switch-img-main">
             </div>
             <div class="img-sub">
-                <img src="{{asset('storage/'.$product->img2_path)}}" alt="">
-                <img src="{{asset('storage/'.$product->img3_path)}}" alt="">
-                <img src="{{asset('storage/'.$product->img4_path)}}" alt="">
+                <img src="{{asset('storage/'.$product->img2_path)}}" alt="" class="js-switch-img-sub">
+                <img src="{{asset('storage/'.$product->img3_path)}}" alt="" class="js-switch-img-sub">
+                <img src="{{asset('storage/'.$product->img4_path)}}" alt="" class="js-switch-img-sub">
             </div>
         </div>
         <!-- 商品詳細コメント -->

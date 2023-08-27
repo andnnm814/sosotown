@@ -15,7 +15,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = Product::paginate(20);
+        $products = Product::paginate(18);
         // dd($products);
         $data = [
             "products" => $products,
